@@ -209,6 +209,11 @@ def generate(image_input, audio_input, pose_input, width, height, length, steps,
     video_clip_sig.write_videofile(save_name + "_sig.mp4", codec="libx264", audio_codec="aac", threads=2)
     video_output = save_name + "_sig.mp4"
     seed_text = gr.update(visible=True, value=seed)
+
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
+
     return video_output, seed_text
 
 
